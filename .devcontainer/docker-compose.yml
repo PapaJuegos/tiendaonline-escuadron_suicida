@@ -1,0 +1,32 @@
+# Entorno de Codespaces: la app + PostgreSQL 16 con pgvector + Redis.
+# Los 3 contenedores comparten red (network_mode: service:db), por eso la app
+# los encuentra en localhost:5432 y localhost:6379, igual que en appsettings.json.
+services:
+  app:
+    image: mcr.microsoft.com/devcontainers/dotnet:1-8.0-bookworm
+    command: sleep infinity
+    volumes:
+      - ../..:/workspaces:cached
+    network_mode: service:db
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://0.0.0.0:8080
+      InitializeDatabase: "true"          # aplica migraciones + datos de ejemplo al arrancar
+
+  db:
+    image: pgvector/pgvector:pg16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: urponline
+      POSTGRES_USER: urponline
+      POSTGRES_PASSWORD: localonly        # solo para Codespaces, igual que appsettings.json
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    network_mode: service:db
+
+volumes:
+  pgdata:
