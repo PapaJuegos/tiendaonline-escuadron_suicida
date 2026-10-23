@@ -1,0 +1,23 @@
+{
+  "name": "URPOnline (.NET 8 + PostgreSQL/pgvector + Redis)",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "features": {
+    "ghcr.io/devcontainers/features/aws-cli:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "forwardPorts": [8080],
+  "portsAttributes": { "8080": { "label": "Tienda URPOnline", "onAutoForward": "openBrowser" } },
+  "postCreateCommand": "dotnet restore TiendaOnline.csproj && bash scripts/descargar-modelo.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-dotnettools.csdevkit",
+        "redhat.vscode-yaml",
+        "kddejong.vscode-cfn-lint",
+        "github.vscode-github-actions"
+      ]
+    }
+  }
+}

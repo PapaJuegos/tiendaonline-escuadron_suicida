@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "ms-dotnettools.csdevkit",
+    "ms-dotnettools.csharp",
+    "amazonwebservices.aws-toolkit-vscode",
+    "redhat.vscode-yaml",
+    "kddejong.vscode-cfn-lint",
+    "mtxr.sqltools",
+    "mtxr.sqltools-driver-pg",
+    "anthropic.claude-code",
+    "github.vscode-github-actions"
+  ]
+}
